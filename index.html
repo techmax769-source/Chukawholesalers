@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Chuka Wholesalers | Premium Glassy E-commerce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: rgba(30, 144, 255, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --text-color: #ffffff;
+            --accent: #00e0ff;
+            --stock-low: #ffaa44;
+            --stock-in: #44ffaa;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a1a1f, #1a2f36, #1f3e48);
+            background-attachment: fixed;
+            color: var(--text-color);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1100;
+            padding: 12px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 25, 35, 0.75);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .search-container {
+            flex: 0.5;
+            max-width: 320px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px 18px;
+            border-radius: 40px;
+            border: none;
+            background: rgba(255,255,255,0.12);
+            color: white;
+            outline: none;
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+            font-size: 1.5rem;
+        }
+
+        #cart-count {
+            position: absolute;
+            top: -10px;
+            right: -12px;
+            background: var(--accent);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 2px 6px;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .main-wrapper {
+            display: flex;
+            margin-top: 80px;
+            padding: 20px 24px;
+            gap: 24px;
+        }
+
+        aside {
+            width: 280px;
+            height: calc(100vh - 110px);
+            position: sticky;
+            top: 95px;
+            padding: 20px 16px;
+            overflow-y: auto;
+            background: rgba(10, 25, 35, 0.5);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            transition: left 0.3s ease;
+        }
+
+        .sidebar-close {
+            display: none;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.2);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-close:hover {
+            background: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list > li {
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            border-radius: 60px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .category-list > li:hover, .category-list > li.active {
+            background: var(--primary-blue);
+            transform: translateX(6px);
+        }
+
+        .subcategory-list {
+            list-style: none;
+            margin-left: 35px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+        }
+
+        .subcategory-list li {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.05);
+            margin-bottom: 5px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        .subcategory-list li:hover, .subcategory-list li.active {
+            background: var(--primary-blue);
+        }
+
+        main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* Hero Slider - Simple Product Cards */
+        .hero-slider {
+            width: 100%;
+            height: 380px;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            background-color: rgba(0,0,0,0.4);
+            background-blend-mode: overlay;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+            border-radius: 28px;
+        }
+
+        .hero-product-info {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            padding: 20px 35px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s;
+        }
+
+        .hero-product-info:hover {
+            transform: scale(1.05);
+            background: rgba(0, 0, 0, 0.8);
+            border-color: var(--accent);
+        }
+
+        .hero-product-info h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .hero-product-info .hero-price {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .hero-product-info .hero-old-price {
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-right: 10px;
+        }
+
+        .hero-product-info .hero-new-price {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .hero-product-info .hero-badge {
+            display: inline-block;
+            background: #ff4444;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-top: 8px;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 20;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .slider-btn:hover {
+            background: var(--accent);
+            transform: translateY(-50%) scale(1.1);
+            color: #000;
+        }
+
+        .slider-prev {
+            left: 20px;
+        }
+
+        .slider-next {
+            right: 20px;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 20;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            width: 25px;
+            border-radius: 10px;
+            background: var(--accent);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 22px;
+            margin-bottom: 30px;
+        }
+
+        .product-card {
+            padding: 16px 12px;
+            transition: all 0.25s ease;
+            text-align: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: 24px;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .stock-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .stock-low { color: var(--stock-low); }
+        .stock-in { color: var(--stock-in); }
+
+        .old-price {
+            text-decoration: line-through;
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-right: 8px;
+        }
+
+        .new-price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .btn-add {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 40px;
+            cursor: pointer;
+            margin-top: 12px;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .page { display: none; }
+        .page.active { display: block; }
+
+        .size-selector {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .size-btn {
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .size-btn.selected {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .product-detail-container {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .detail-img {
+            flex: 1;
+            min-width: 260px;
+            border-radius: 28px;
+            max-height: 360px;
+            object-fit: cover;
+        }
+
+        .reviews-section {
+            margin-top: 48px;
+            padding: 28px;
+            border-radius: 28px;
+        }
+
+        .review-card {
+            margin-bottom: 20px;
+            padding: 16px;
+            border-left: 4px solid var(--accent);
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .location-container {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 24px;
+            padding: 24px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .location-container:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 224, 255, 0.2);
+        }
+        
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .location-header i {
+            font-size: 1.8rem;
+            color: var(--accent);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .location-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .location-input-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .location-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 60px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .location-input:focus {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(0, 224, 255, 0.3);
+        }
+        
+        .location-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .location-hint {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            margin-top: 10px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .coming-soon {
+            margin: 40px 0;
+            padding: 40px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0,224,255,0.1), rgba(0,0,0,0.3));
+            border-radius: 28px;
+            border: 2px dashed var(--accent);
+        }
+
+        .coming-soon h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        footer {
+            margin-top: 60px;
+            padding: 28px 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 62px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1100;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            aside {
+                position: fixed;
+                left: -300px;
+                top: 0;
+                z-index: 2000;
+                width: 280px;
+                height: 100vh;
+                border-radius: 0 28px 28px 0;
+                margin-top: 0;
+                padding-top: 60px;
+            }
+            aside.show {
+                left: 0;
+            }
+            .sidebar-close {
+                display: flex;
+                top: 20px;
+                right: 20px;
+            }
+            .mobile-nav { display: flex; }
+            .hamburger { display: block; }
+            .search-container { display: none; }
+            .main-wrapper { margin-bottom: 70px; padding: 12px; margin-top: 70px; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+            .product-card img { height: 130px; }
+            .hero-slider { height: 280px; }
+            .hero-product-info h3 { font-size: 1.2rem; }
+            .hero-product-info { padding: 12px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></div>
+        <div class="logo" onclick="showPage('home-page')">CHUKA WHOLESALERS</div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchProducts()">
+        </div>
+        <div class="cart-icon" onclick="showCart()">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <div class="main-wrapper">
+        <aside id="sidebar" class="glass">
+            <div class="sidebar-close" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </div>
+            <h3 style="margin-bottom: 15px;"><i class="fas fa-tags"></i> Categories</h3>
+            <ul class="category-list" id="category-list">
+                <li data-cat="All" data-sub="null" class="active"><i class="fas fa-th-large"></i> All Products</li>
+                <li data-cat="Electronics" data-sub="null"><i class="fas fa-plug"></i> Electronics</li>
+                <ul class="subcategory-list" id="electronics-sub" style="display: none;">
+                    <li data-cat="Electronics" data-sub="Earpods"><i class="fas fa-headphones"></i> Earpods</li>
+                    <li data-cat="Electronics" data-sub="Chargers"><i class="fas fa-battery-full"></i> Chargers</li>
+                </ul>
+                <li data-cat="Bags" data-sub="null"><i class="fas fa-shopping-bag"></i> Bags</li>
+                <ul class="subcategory-list" id="bags-sub" style="display: none;">
+                    <li data-cat="Bags" data-sub="Ladies Bags"><i class="fas fa-female"></i> Ladies Bags</li>
+                    <li data-cat="Bags" data-sub="Men Bags"><i class="fas fa-male"></i> Men Bags</li>
+                </ul>
+                <li data-cat="Shoes" data-sub="null"><i class="fas fa-boot-alt"></i> Shoes</li>
+                <ul class="subcategory-list" id="shoes-sub" style="display: none;">
+                    <li data-cat="Shoes" data-sub="Men Shoes"><i class="fas fa-male"></i> Men Shoes</li>
+                    <li data-cat="Shoes" data-sub="Ladies Shoes"><i class="fas fa-female"></i> Ladies Shoes</li>
+                </ul>
+                <li data-cat="Clothes" data-sub="null"><i class="fas fa-tshirt"></i> Clothes</li>
+                <ul class="subcategory-list" id="clothes-sub" style="display: none;">
+                    <li data-cat="Clothes" data-sub="Men Trousers"><i class="fas fa-tshirt"></i> Men Trousers</li>
+                    <li data-cat="Clothes" data-sub="Ladies Trousers"><i class="fas fa-female"></i> Ladies Trousers</li>
+                    <li data-cat="Clothes" data-sub="Men Shirts"><i class="fas fa-shirt"></i> Men Shirts</li>
+                </ul>
+                <li data-cat="Watches" data-sub="null"><i class="fas fa-clock"></i> Watches</li>
+                <ul class="subcategory-list" id="watches-sub" style="display: none;">
+                    <li data-cat="Watches" data-sub="Ladies Watches"><i class="fas fa-female"></i> Ladies Watches</li>
+                    <li data-cat="Watches" data-sub="Men Watches"><i class="fas fa-male"></i> Men Watches</li>
+                </ul>
+            </ul>
+            <div style="margin-top: 30px; font-size: 0.7rem; opacity: 0.7; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px;">
+                <p><i class="fas fa-truck"></i> Delivery: Tharaka Nithi (Chuka, Embu)</p>
+                <p><i class="fas fa-map-marker-alt"></i> Location: Chuka Town</p>
+                <p><i class="fas fa-phone"></i> Call/WhatsApp: 0742 123 456</p>
+            </div>
+        </aside>
+
+        <main>
+            <div id="home-page" class="page active">
+                <div class="hero-slider glass">
+                    <div class="slider-container">
+                        <div class="slider-track" id="sliderTrack"></div>
+                        <div class="slider-btn slider-prev" onclick="changeSlide(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div class="slider-btn slider-next" onclick="changeSlide(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="slider-dots" id="sliderDots"></div>
+                    </div>
+                </div>
+
+                <h2 id="category-title" style="margin-bottom: 20px;">✨ All Products</h2>
+                <div class="product-grid" id="product-grid"></div>
+                
+                <div class="coming-soon">
+                    <i class="fas fa-box-open"></i>
+                    <h2>More Products Coming Soon!</h2>
+                    <p>We're constantly adding new items to our collection. Stay tuned for fresh arrivals!</p>
+                </div>
+                
+                <section class="reviews-section glass">
+                    <h2><i class="fas fa-star" style="color:#ffcc00;"></i> Customer Reviews</h2>
+                    <div id="reviews-container"></div>
+                </section>
+            </div>
+
+            <div id="product-page" class="page">
+                <button class="btn-add" onclick="showPage('home-page')" style="width: auto; padding: 8px 20px; margin-bottom: 24px;"><i class="fas fa-arrow-left"></i> Back</button>
+                <div id="product-details" class="glass" style="padding: 28px;"></div>
+                <h3 style="margin: 40px 0 20px;">🛍️ Similar Items</h3>
+                <div class="product-grid" id="similar-products"></div>
+            </div>
+
+            <div id="cart-page" class="page">
+                <h1><i class="fas fa-bag-shopping"></i> Your Cart</h1>
+                <div id="cart-items-container" style="margin-top: 24px;"></div>
+                <div id="cart-summary" class="glass" style="padding: 24px; margin-top: 24px;"></div>
+            </div>
+        </main>
+    </div>
+
+    <div class="mobile-nav">
+        <div onclick="showPage('home-page')"><i class="fas fa-home"></i><span style="font-size: 11px;">Home</span></div>
+        <div onclick="toggleSidebar()"><i class="fas fa-list"></i><span style="font-size: 11px;">Categories</span></div>
+        <div onclick="showCart()"><i class="fas fa-shopping-cart"></i><span style="font-size: 11px;">Cart</span></div>
+        <div onclick="window.open('https://wa.me/254738734134')"><i class="fab fa-whatsapp"></i><span style="font-size: 11px;">WhatsApp</span></div>
+    </div>
+
+    <footer>
+        <p>© 2024–2026 Chuka Wholesalers | Quality & Trust</p>
+        <p>📍 Serving Tharaka Nithi & Embu Region | Same-day delivery</p>
+    </footer>
+
+    <script>
+        const ASSETS_URL = 'https://raw.githubusercontent.com/techmax769-source/Chukawholesalers/main/assets/';
+        
+        const products = [
+            { id: 1, category: 'Electronics', subcategory: 'Earpods', name: 'YooType K14 Wireless Earbuds', price: 599, oldPrice: 650, img: 'img1.jpg', desc: 'High fidelity sound, long battery life, fast pairing.', needsSize: false, stock: 28 },
+            { id: 2, category: 'Electronics', subcategory: 'Earpods', name: 'RichRipple Y50 Plus+ Earbuds', price: 345, oldPrice: 399, img: 'img2.jpg', desc: 'Noise cancelling Bluetooth 5.0, IPX5 water resistant.', needsSize: false, stock: 35 },
+            { id: 3, category: 'Electronics', subcategory: 'Earpods', name: 'M19 Bluetooth LED Earbuds', price: 399, oldPrice: 438, img: 'img3.jpg', desc: 'LED power display, ergonomic fit.', needsSize: false, stock: 22 },
+            { id: 4, category: 'Electronics', subcategory: 'Earpods', name: 'VEDO F9 Wireless Earbuds', price: 475, oldPrice: 500, img: 'img4.jpg', desc: 'Gaming mode, ultra low latency.', needsSize: false, stock: 18 },
+            { id: 5, category: 'Electronics', subcategory: 'Earpods', name: 'M90 Pro Gaming Earbuds', price: 339, oldPrice: 357, img: 'img5.jpg', desc: 'Rich bass, 30h battery case.', needsSize: false, stock: 42 },
+            { id: 6, category: 'Electronics', subcategory: 'Chargers', name: 'Samsung 25W Fast Charger', price: 300, oldPrice: 349, img: 'img6.jpg', desc: 'Original super fast charging kit.', needsSize: false, stock: 45 },
+            { id: 7, category: 'Electronics', subcategory: 'Chargers', name: 'Samsung 25W Type-C Charger', price: 465, oldPrice: 490, img: 'img7.jpg', desc: 'Includes cable + adapter, genuine.', needsSize: false, stock: 38 },
+            { id: 8, category: 'Electronics', subcategory: 'Chargers', name: 'Samsung 65W Trio Charger', price: 899, oldPrice: 1200, img: 'img8.jpg', desc: 'Fast charging for multiple devices.', needsSize: false, stock: 15 },
+            { id: 9, category: 'Electronics', subcategory: 'Chargers', name: 'Amaya 25W Fast Charger', price: 850, oldPrice: 990, img: 'img9.jpg', desc: 'Premium quality fast charger.', needsSize: false, stock: 25 },
+            { id: 10, category: 'Electronics', subcategory: 'Chargers', name: 'Lenovo 65W Laptop Charger', price: 1200, oldPrice: 1500, img: 'img10.jpg', desc: 'Compatible with most laptops.', needsSize: false, stock: 12 },
+            { id: 11, category: 'Bags', subcategory: 'Ladies Bags', name: 'Stylish Ladies Handbag', price: 399, oldPrice: 550, img: 'img11.jpg', desc: 'Elegant design, perfect for daily use.', needsSize: false, stock: 20 },
+            { id: 12, category: 'Bags', subcategory: 'Ladies Bags', name: 'Premium Leather Tote Bag', price: 850, oldPrice: 1100, img: 'img12.jpg', desc: 'Spacious and durable.', needsSize: false, stock: 15 },
+            { id: 13, category: 'Bags', subcategory: 'Ladies Bags', name: 'Fashion Crossbody Bag', price: 450, oldPrice: 650, img: 'img13.jpg', desc: 'Trendy and lightweight.', needsSize: false, stock: 28 },
+            { id: 14, category: 'Bags', subcategory: 'Ladies Bags', name: 'Designer Shoulder Bag', price: 699, oldPrice: 899, img: 'img14.jpg', desc: 'Chic and stylish.', needsSize: false, stock: 18 },
+            { id: 15, category: 'Bags', subcategory: 'Ladies Bags', name: 'Luxury Evening Clutch', price: 550, oldPrice: 750, img: 'img15.jpg', desc: 'Perfect for special occasions.', needsSize: false, stock: 22 },
+            { id: 16, category: 'Bags', subcategory: 'Men Bags', name: 'Men Travel Backpack', price: 1200, oldPrice: 1500, img: 'img16.jpg', desc: 'Spacious with USB charging port.', needsSize: false, stock: 25 },
+            { id: 17, category: 'Bags', subcategory: 'Men Bags', name: 'Business Laptop Bag', price: 899, oldPrice: 1200, img: 'img17.jpg', desc: 'Professional and sleek.', needsSize: false, stock: 30 },
+            { id: 18, category: 'Bags', subcategory: 'Men Bags', name: 'Casual Sling Bag', price: 600, oldPrice: 800, img: 'img18.jpg', desc: 'Lightweight and practical.', needsSize: false, stock: 35 },
+            { id: 19, category: 'Bags', subcategory: 'Men Bags', name: 'Duffle Gym Bag', price: 950, oldPrice: 1300, img: 'img19.jpg', desc: 'Spacious for sports and travel.', needsSize: false, stock: 20 },
+            { id: 20, category: 'Bags', subcategory: 'Men Bags', name: 'Leather Messenger Bag', price: 1100, oldPrice: 1400, img: 'img20.jpg', desc: 'Premium quality leather.', needsSize: false, stock: 15 },
+            { id: 21, category: 'Shoes', subcategory: 'Men Shoes', name: 'Classic Leather Loafers', price: 899, oldPrice: 1200, img: 'img21.jpg', desc: 'Comfortable and stylish.', needsSize: true, sizes: ['38', '39', '40', '41', '42', '43'], stock: 25 },
+            { id: 22, category: 'Shoes', subcategory: 'Men Shoes', name: 'Sports Running Shoes', price: 1500, oldPrice: 1900, img: 'img22.jpg', desc: 'Lightweight with cushioning.', needsSize: true, sizes: ['39', '40', '41', '42', '43', '44'], stock: 32 },
+            { id: 23, category: 'Shoes', subcategory: 'Men Shoes', name: 'Casual Sneakers', price: 1200, oldPrice: 1600, img: 'img23.jpg', desc: 'Perfect for daily wear.', needsSize: true, sizes: ['40', '41', '42', '43'], stock: 28 },
+            { id: 24, category: 'Shoes', subcategory: 'Men Shoes', name: 'Formal Oxford Shoes', price: 1800, oldPrice: 2200, img: 'img24.jpg', desc: 'Elegant for office wear.', needsSize: true, sizes: ['39', '40', '41', '42'], stock: 18 },
+            { id: 25, category: 'Shoes', subcategory: 'Men Shoes', name: 'Slip-on Casual Shoes', price: 1100, oldPrice: 1400, img: 'img25.jpg', desc: 'Easy to wear and comfortable.', needsSize: true, sizes: ['40', '41', '42', '43'], stock: 22 },
+            { id: 26, category: 'Shoes', subcategory: 'Ladies Shoes', name: 'Fashion Sneakers', price: 299, oldPrice: 450, img: 'img26.jpg', desc: 'Lightweight and stylish.', needsSize: true, sizes: ['36', '37', '38', '39', '40'], stock: 35 },
+            { id: 27, category: 'Shoes', subcategory: 'Ladies Shoes', name: 'Elegant Heels', price: 650, oldPrice: 850, img: 'img27.jpg', desc: 'Perfect for parties.', needsSize: true, sizes: ['36', '37', '38', '39'], stock: 20 },
+            { id: 28, category: 'Shoes', subcategory: 'Ladies Shoes', name: 'Comfort Flats', price: 450, oldPrice: 600, img: 'img28.jpg', desc: 'All-day comfort.', needsSize: true, sizes: ['37', '38', '39', '40'], stock: 28 },
+            { id: 29, category: 'Shoes', subcategory: 'Ladies Shoes', name: 'Sports Shoes', price: 550, oldPrice: 750, img: 'img29.jpg', desc: 'Great for workouts.', needsSize: true, sizes: ['36', '37', '38', '39', '40'], stock: 24 },
+            { id: 30, category: 'Shoes', subcategory: 'Ladies Shoes', name: 'Boots Ankle', price: 800, oldPrice: 1000, img: 'img30.jpg', desc: 'Stylish winter footwear.', needsSize: true, sizes: ['37', '38', '39', '40'], stock: 15 },
+            { id: 31, category: 'Clothes', subcategory: 'Men Trousers', name: 'Classic Fit Trousers', price: 500, oldPrice: 700, img: 'img31.jpg', desc: 'Comfortable office wear.', needsSize: true, sizes: ['30', '32', '34', '36', '38'], stock: 30 },
+            { id: 32, category: 'Clothes', subcategory: 'Men Trousers', name: 'Slim Fit Chinos', price: 650, oldPrice: 850, img: 'img32.jpg', desc: 'Modern and stylish.', needsSize: true, sizes: ['30', '32', '34', '36'], stock: 28 },
+            { id: 33, category: 'Clothes', subcategory: 'Men Trousers', name: 'Casual Joggers', price: 550, oldPrice: 750, img: 'img33.jpg', desc: 'Comfortable for casual wear.', needsSize: true, sizes: ['S', 'M', 'L', 'XL'], stock: 35 },
+            { id: 34, category: 'Clothes', subcategory: 'Men Trousers', name: 'Formal Wool Trousers', price: 1000, oldPrice: 1300, img: 'img34.jpg', desc: 'Premium quality fabric.', needsSize: true, sizes: ['32', '34', '36', '38'], stock: 18 },
+            { id: 35, category: 'Clothes', subcategory: 'Men Trousers', name: 'Denim Jeans', price: 750, oldPrice: 950, img: 'img35.jpg', desc: 'Durable and fashionable.', needsSize: true, sizes: ['30', '32', '34', '36', '38'], stock: 40 },
+            { id: 36, category: 'Clothes', subcategory: 'Ladies Trousers', name: 'High Waist Trousers', price: 500, oldPrice: 700, img: 'img36.jpg', desc: 'Elegant office wear.', needsSize: true, sizes: ['XS', 'S', 'M', 'L', 'XL'], stock: 25 },
+            { id: 37, category: 'Clothes', subcategory: 'Ladies Trousers', name: 'Jeggings', price: 550, oldPrice: 750, img: 'img37.jpg', desc: 'Stretchy and comfortable.', needsSize: true, sizes: ['S', 'M', 'L', 'XL'], stock: 32 },
+            { id: 38, category: 'Clothes', subcategory: 'Ladies Trousers', name: 'Wide Leg Pants', price: 650, oldPrice: 850, img: 'img38.jpg', desc: 'Trendy and fashionable.', needsSize: true, sizes: ['S', 'M', 'L'], stock: 20 },
+            { id: 39, category: 'Clothes', subcategory: 'Ladies Trousers', name: 'Skinny Fit Pants', price: 600, oldPrice: 800, img: 'img39.jpg', desc: 'Perfect fit and style.', needsSize: true, sizes: ['XS', 'S', 'M', 'L'], stock: 28 },
+            { id: 40, category: 'Clothes', subcategory: 'Ladies Trousers', name: 'Cargo Pants', price: 900, oldPrice: 1100, img: 'img40.jpg', desc: 'Functional and stylish.', needsSize: true, sizes: ['S', 'M', 'L', 'XL'], stock: 22 },
+            { id: 41, category: 'Clothes', subcategory: 'Men Shirts', name: 'Casual Button Shirt', price: 400, oldPrice: 600, img: 'img41.jpg', desc: 'Breathable cotton fabric.', needsSize: true, sizes: ['S', 'M', 'L', 'XL', 'XXL'], stock: 38 },
+            { id: 42, category: 'Clothes', subcategory: 'Men Shirts', name: 'Formal Dress Shirt', price: 799, oldPrice: 999, img: 'img42.jpg', desc: 'Crisp and professional.', needsSize: true, sizes: ['M', 'L', 'XL', 'XXL'], stock: 30 },
+            { id: 43, category: 'Clothes', subcategory: 'Men Shirts', name: 'Polo Shirt', price: 500, oldPrice: 700, img: 'img43.jpg', desc: 'Casual and comfortable.', needsSize: true, sizes: ['S', 'M', 'L', 'XL'], stock: 35 },
+            { id: 44, category: 'Clothes', subcategory: 'Men Shirts', name: 'Linen Summer Shirt', price: 650, oldPrice: 850, img: 'img44.jpg', desc: 'Lightweight for hot weather.', needsSize: true, sizes: ['M', 'L', 'XL'], stock: 25 },
+            { id: 45, category: 'Clothes', subcategory: 'Men Shirts', name: 'Denim Shirt', price: 750, oldPrice: 950, img: 'img45.jpg', desc: 'Stylish and durable.', needsSize: true, sizes: ['M', 'L', 'XL', 'XXL'], stock: 28 },
+            { id: 46, category: 'Watches', subcategory: 'Ladies Watches', name: 'Elegant Rose Gold Watch', price: 399, oldPrice: 550, img: 'img46.jpg', desc: 'Stylish and elegant.', needsSize: false, stock: 20 },
+            { id: 47, category: 'Watches', subcategory: 'Ladies Watches', name: 'Silver Chain Watch', price: 650, oldPrice: 850, img: 'img47.jpg', desc: 'Classic design.', needsSize: false, stock: 18 },
+            { id: 48, category: 'Watches', subcategory: 'Ladies Watches', name: 'Leather Strap Watch', price: 550, oldPrice: 750, img: 'img48.jpg', desc: 'Comfortable and chic.', needsSize: false, stock: 25 },
+            { id: 49, category: 'Watches', subcategory: 'Ladies Watches', name: 'Diamond Dial Watch', price: 1000, oldPrice: 1300, img: 'img49.jpg', desc: 'Luxury timepiece.', needsSize: false, stock: 12 },
+            { id: 50, category: 'Watches', subcategory: 'Ladies Watches', name: 'Fashion Digital Watch', price: 450, oldPrice: 600, img: 'img50.jpg', desc: 'Modern and functional.', needsSize: false, stock: 30 },
+            { id: 51, category: 'Watches', subcategory: 'Men Watches', name: 'Silver Steel Chronograph', price: 1400, oldPrice: 1900, img: 'img51.jpg', desc: 'Water resistant, luxury watch.', needsSize: false, stock: 18 },
+            { id: 52, category: 'Watches', subcategory: 'Men Watches', name: 'Sports Digital Watch', price: 599, oldPrice: 799, img: 'img52.jpg', desc: 'Durable for outdoor activities.', needsSize: false, stock: 28 },
+            { id: 53, category: 'Watches', subcategory: 'Men Watches', name: 'Leather Band Watch', price: 899, oldPrice: 1200, img: 'img53.jpg', desc: 'Classic and elegant.', needsSize: false, stock: 22 },
+            { id: 54, category: 'Watches', subcategory: 'Men Watches', name: 'Business Stainless Watch', price: 1100, oldPrice: 1500, img: 'img54.jpg', desc: 'Perfect for office wear.', needsSize: false, stock: 15 },
+            { id: 55, category: 'Watches', subcategory: 'Men Watches', name: 'Smart Watch', price: 1800, oldPrice: 2200, img: 'img55.jpg', desc: 'Fitness tracking and notifications.', needsSize: false, stock: 25 }
+        ];
+
+        const reviews = [
+            { name: "Omar", comment: "The earpods are amazing. Delivery was very fast!", reply: "Thank you Omar, glad you loved them!" },
+            { name: "Sasha", comment: "Beautiful bags, will definitely order more.", reply: "We appreciate your support!" },
+            { name: "Omondi", comment: "The Samsung charger is genuine fast charging.", reply: "Quality is our priority." },
+            { name: "Nelly", comment: "Great prices, best in Chuka.", reply: "Thanks Nelly! Shop with us again." }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('chuka_cart')) || [];
+        let selectedSizes = JSON.parse(localStorage.getItem('chuka_selected_sizes')) || {};
+        let currentSlide = 0;
+        let slideInterval;
+        let sliderProducts = [];
+
+        function getStockStatus(stock) {
+            if (stock <= 5) return { class: 'stock-low', text: `⚠️ Only ${stock} left!` };
+            if (stock <= 15) return { class: 'stock-low', text: `📦 ${stock} left` };
+            return { class: 'stock-in', text: `✅ In Stock (${stock})` };
+        }
+
+        function getImageUrl(filename) {
+            return ASSETS_URL + filename;
+        }
+
+        function saveCart() { 
+            localStorage.setItem('chuka_cart', JSON.stringify(cart)); 
+            localStorage.setItem('chuka_selected_sizes', JSON.stringify(selectedSizes));
+            updateCartCount(); 
+        }
+        
+        function updateCartCount() { 
+            document.getElementById('cart-count').innerText = cart.reduce((a, i) => a + i.qty, 0); 
+        }
+
+        function renderProducts(productArray) {
+            const grid = document.getElementById('product-grid');
+            if (!grid) return;
+            grid.innerHTML = productArray.map(p => {
+                const stockStatus = getStockStatus(p.stock);
+                return `
+                <div class="product-card" onclick="viewProduct(${p.id})">
+                    <div class="stock-badge ${stockStatus.class}">${stockStatus.text}</div>
+                    <img src="${getImageUrl(p.img)}" alt="${p.name}" loading="lazy" onerror="this.src='https://placehold.co/400x400/1e2a32/00e0ff?text=${encodeURIComponent(p.name.substring(0,10))}'">
+                    <h4>${p.name.length > 35 ? p.name.substring(0,32)+'...' : p.name}</h4>
+                    <div>
+                        <span class="old-price">KSh ${p.oldPrice}</span>
+                        <span class="new-price">KSh ${p.price}</span>
+                    </div>
+                    <button class="btn-add" onclick="event.stopPropagation(); addToCart(${p.id})" ${p.stock <= 0 ? 'disabled' : ''}><i class="fas fa-cart-plus"></i> Add</button>
+                </div>
+            `}).join('');
+        }
+
+        function filterByCategoryAndSub(category, subcategory = null) {
+            let filtered = products;
+            if (category !== 'All') {
+                filtered = products.filter(p => p.category === category);
+                if (subcategory) {
+                    filtered = filtered.filter(p => p.subcategory === subcategory);
+                }
+            }
+            let title = '';
+            if (subcategory) title = subcategory;
+            else if (category !== 'All') title = category;
+            else title = 'All Products';
+            document.getElementById('category-title').innerHTML = `✨ ${title}`;
+            renderProducts(filtered);
+            showPage('home-page');
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            renderProducts(filtered);
+            document.getElementById('category-title').innerHTML = query ? `🔍 Search: "${query}"` : '✨ All Products';
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0 });
+            if (window.innerWidth < 768) document.getElementById('sidebar')?.classList.remove('show');
+        }
+
+        function viewProduct(id) {
+            const p = products.find(prod => prod.id === id);
+            if (!p) return;
+            
+            const sizeSelectorHtml = p.needsSize ? `
+                <div class="size-selector">
+                    <label><i class="fas fa-ruler"></i> Select Size:</label>
+                    <div class="size-options">
+                        ${p.sizes.map(size => `
+                            <div class="size-btn ${selectedSizes[id] === size ? 'selected' : ''}" onclick="event.stopPropagation(); selectSize(${p.id}, '${size}')">${size}</div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : '';
+            
+            const stockStatus = getStockStatus(p.stock);
+            
+            const container = document.getElementById('product-details');
+            container.innerHTML = `
+                <div class="product-detail-container">
+                    <img src="${getImageUrl(p.img)}" class="detail-img" alt="${p.name}" onerror="this.src='https://placehold.co/600x600/1e2a32/00e0ff?text=${encodeURIComponent(p.name)}'">
+                    <div class="detail-info">
+                        <h1>${p.name}</h1>
+                        <div class="stock-badge ${stockStatus.class}" style="position: relative; display: inline-block; margin: 10px 0;">${stockStatus.text}</div>
+                        <div class="star-rating">⭐⭐⭐⭐☆ (4.5/5)</div>
+                        <p style="margin: 20px 0;">${p.desc}</p>
+                        <div style="margin-bottom: 20px;">
+                            <span class="old-price" style="font-size:1.2rem;">KSh ${p.oldPrice}</span><br>
+                            <span class="new-price" style="font-size:2rem;">KSh ${p.price}</span>
+                        </div>
+                        ${sizeSelectorHtml}
+                        <button class="btn-add" style="padding:14px;" onclick="addToCart(${p.id})" ${p.stock <= 0 ? 'disabled' : ''}><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="btn-add" style="padding:14px; background:#25D366; margin-top:12px;" onclick="checkoutSingle(${p.id})"><i class="fab fa-whatsapp"></i> Order via WhatsApp</button>
+                    </div>
+                </div>
+            `;
+            
+            const similar = products.filter(item => item.category === p.category && item.id !== p.id).slice(0, 4);
+            const similarGrid = document.getElementById('similar-products');
+            similarGrid.innerHTML = similar.map(s => `
+                <div class="product-card" onclick="viewProduct(${s.id})">
+                    <img src="${getImageUrl(s.img)}" alt="${s.name}" onerror="this.src='https://placehold.co/400x400/1e2a32/00e0ff?text=?'">
+                    <h4>${s.name}</h4>
+                    <span class="new-price">KSh ${s.price}</span>
+                </div>
+            `).join('');
+            showPage('product-page');
+        }
+
+        function selectSize(productId, size) {
+            selectedSizes[productId] = size;
+            localStorage.setItem('chuka_selected_sizes', JSON.stringify(selectedSizes));
+            document.querySelectorAll('.size-btn').forEach(btn => {
+                btn.classList.remove('selected');
+                if(btn.innerText === size) btn.classList.add('selected');
+            });
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (product.stock <= 0) { alert("Out of stock!"); return; }
+            if (product.needsSize && !selectedSizes[id]) { alert(`Please select a size for ${product.name}`); return; }
+            
+            const existing = cart.find(i => i.id === id && i.size === (selectedSizes[id] || null));
+            if (!existing) {
+                cart.push({ ...product, qty: 1, size: product.needsSize ? selectedSizes[id] : null, sizeLabel: product.needsSize ? `Size: ${selectedSizes[id]}` : null });
+                saveCart();
+                showToast(`${product.name} added!`, '#1f8b4c');
+            } else {
+                showToast(`${product.name} already in cart!`, '#ff9800');
+            }
+        }
+
+        function showToast(msg, bgColor) {
+            const toast = document.createElement('div');
+            toast.innerText = msg;
+            toast.style.cssText = `position:fixed; bottom:80px; left:20px; background:${bgColor}; padding:8px 20px; border-radius:40px; z-index:9999; color:white;`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 1800);
+        }
+
+        function removeFromCart(id, size) {
+            cart = cart.filter(item => !(item.id === id && item.size === size));
+            saveCart();
+            showCart();
+        }
+
+        function showCart() {
+            const container = document.getElementById('cart-items-container');
+            const summaryDiv = document.getElementById('cart-summary');
+            if (!cart.length) {
+                container.innerHTML = '<div class="glass" style="padding:30px; text-align:center;">Your cart is empty.</div>';
+                summaryDiv.innerHTML = '';
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="cart-item glass">
+                        <div style="display:flex; gap:15px; align-items:center;">
+                            <img src="${getImageUrl(item.img)}" width="55" style="border-radius:12px;" onerror="this.src='https://placehold.co/55x55/1e2a32/00e0ff?text=?'">
+                            <div><strong>${item.name}</strong><br>${item.sizeLabel ? `${item.sizeLabel}<br>` : ''}KSh ${item.price}</div>
+                        </div>
+                        <button onclick="removeFromCart(${item.id}, '${item.size || ''}')" style="background:#ff4444; border:none; color:white; padding:6px 16px; border-radius:40px;"><i class="fas fa-trash"></i> Remove</button>
+                    </div>
+                `).join('');
+                const total = cart.reduce((s, i) => s + i.price, 0);
+                summaryDiv.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+                        <h3>Total:</h3>
+                        <h3 class="new-price">KSh ${total}</h3>
+                    </div>
+                    <div class="location-container">
+                        <div class="location-header">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>Delivery Location</h3>
+                        </div>
+                        <div class="location-input-wrapper">
+                            <input type="text" id="userLocation" class="location-input" placeholder="📍 Enter your delivery location (e.g., Chuka Town, Embu, Kathwana)" value="">
+                        </div>
+                        <div class="location-hint">
+                            <i class="fas fa-truck"></i>
+                            <span>We deliver within Tharaka Nithi & Embu region</span>
+                        </div>
+                    </div>
+                    <button class="btn-add" style="background:#25D366; padding:14px; font-weight:bold; margin-top:8px;" onclick="checkoutCart()"><i class="fab fa-whatsapp"></i> Complete Order via WhatsApp</button>
+                `;
+            }
+            showPage('cart-page');
+        }
+
+        function checkoutSingle(id) {
+            const p = products.find(item => item.id === id);
+            const locationContainer = document.createElement('div');
+            locationContainer.className = 'location-container';
+            locationContainer.style.position = 'fixed';
+            locationContainer.style.top = '50%';
+            locationContainer.style.left = '50%';
+            locationContainer.style.transform = 'translate(-50%, -50%)';
+            locationContainer.style.zIndex = '2000';
+            locationContainer.style.minWidth = '300px';
+            locationContainer.style.maxWidth = '400px';
+            locationContainer.innerHTML = `
+                <div class="location-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Delivery Location</h3>
+                </div>
+                <div class="location-input-wrapper">
+                    <input type="text" id="modalLocation" class="location-input" placeholder="📍 Enter your location">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button class="btn-add" onclick="confirmSingleOrder(${p.id})">Confirm</button>
+                    <button class="btn-add" style="background:#ff4444;" onclick="this.parentElement.parentElement.remove()">Cancel</button>
+                </div>
+            `;
+            document.body.appendChild(locationContainer);
+        }
+
+        function confirmSingleOrder(id) {
+            const location = document.getElementById('modalLocation')?.value;
+            if (!location) {
+                alert("Please enter delivery location");
+                return;
+            }
+            const p = products.find(item => item.id === id);
+            let sizeInfo = "";
+            if (p.needsSize) {
+                let size = prompt(`Select size (${p.sizes.join(', ')}):`);
+                if (!size) return;
+                sizeInfo = `\nSize: ${size}`;
+            }
+            document.querySelector('.location-container')?.remove();
+            window.open(`https://wa.me/254738734134?text=${encodeURIComponent(`Hello Chuka Wholesalers,%0AProduct: ${p.name}${sizeInfo}%0APrice: KSh ${p.price}%0ALocation: ${location}`)}`);
+        }
+
+        function checkoutCart() {
+            const location = document.getElementById('userLocation')?.value;
+            if (!location) { 
+                alert("Please enter delivery location in the beautiful container above");
+                return; 
+            }
+            let items = cart.map(i => `- ${i.name}${i.sizeLabel ? ` (${i.sizeLabel})` : ''} @ KSh ${i.price}`).join('%0A');
+            let total = cart.reduce((s, i) => s + i.price, 0);
+            window.open(`https://wa.me/254738734134?text=${encodeURIComponent(`Hello Chuka Wholesalers,%0AOrder:%0A${items}%0ATotal: KSh ${total}%0ALocation: ${location}`)}`);
+        }
+
+        function renderReviews() {
+            const container = document.getElementById('reviews-container');
+            if(container) container.innerHTML = reviews.map(r => `
+                <div class="review-card"><strong>${r.name}</strong> ⭐⭐⭐⭐⭐<p>"${r.comment}"</p><div class="reply">Chuka Wholesalers: ${r.reply}</div></div>
+            `).join('');
+        }
+
+        function toggleSidebar() { 
+            document.getElementById('sidebar').classList.toggle('show');
+        }
+
+        // Hero Slider Functions - Simple product cards with image and name
+        function initSlider() {
+            const shuffled = [...products];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            sliderProducts = shuffled.slice(0, 8);
+            
+            const track = document.getElementById('sliderTrack');
+            const dotsContainer = document.getElementById('sliderDots');
+            
+            track.innerHTML = sliderProducts.map(product => `
+                <div class="hero-slide" style="background-image: url('${getImageUrl(product.img)}')" onclick="viewProduct(${product.id})">
+                    <div class="hero-product-info">
+                        <h3>${product.name}</h3>
+                        <div class="hero-price">
+                            <span class="hero-old-price">KSh ${product.oldPrice}</span>
+                            <span class="hero-new-price">KSh ${product.price}</span>
+                        </div>
+                        <div class="hero-badge">Click to View</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            dotsContainer.innerHTML = sliderProducts.map((_, index) => `
+                <div class="dot ${index === 0 ? 'active' : ''}" onclick="goToSlide(${index})"></div>
+            `).join('');
+            
+            startAutoSlide();
+        }
+        
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide >= sliderProducts.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = sliderProducts.length - 1;
+            updateSlider();
+            resetAutoSlide();
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+            resetAutoSlide();
+        }
+        
+        function updateSlider() {
+            const track = document.getElementById('sliderTrack');
+            if (track) {
+                track.style.transform = `translateX(-${currentSlide * 100}%)`;
+                document.querySelectorAll('.dot').forEach((dot, i) => {
+                    if (i === currentSlide) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+            }
+        }
+        
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                currentSlide++;
+                if (currentSlide >= sliderProducts.length) currentSlide = 0;
+                updateSlider();
+            }, 5000);
+        }
+        
+        function resetAutoSlide() {
+            clearInterval(slideInterval);
+            startAutoSlide();
+        }
+
+        document.querySelectorAll('#category-list > li[data-cat]').forEach(li => {
+            li.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const cat = li.getAttribute('data-cat');
+                if (cat === 'All') filterByCategoryAndSub('All');
+                else {
+                    const subUl = document.getElementById(`${cat.toLowerCase()}-sub`);
+                    if (subUl) subUl.style.display = subUl.style.display === 'none' ? 'block' : 'none';
+                }
+                document.querySelectorAll('#category-list > li').forEach(l => l.classList.remove('active'));
+                li.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.subcategory-list li').forEach(li => {
+            li.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const cat = li.getAttribute('data-cat');
+                const sub = li.getAttribute('data-sub');
+                filterByCategoryAndSub(cat, sub);
+                document.querySelectorAll('#category-list > li').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.subcategory-list li').forEach(l => l.classList.remove('active'));
+                li.classList.add('active');
+            });
+        });
+
+        window.onload = () => {
+            initSlider();
+            renderProducts(products);
+            renderReviews();
+            updateCartCount();
+        };
+    </script>
+</body>
+</html>
